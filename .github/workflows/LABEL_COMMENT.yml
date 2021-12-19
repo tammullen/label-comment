@@ -5,7 +5,7 @@ on:
       - labeled
 jobs:
   add-support-comment:
-    if: github.event.label.name == 'type: support request'
+    if: "github.event.label.name == 'type: support request'"
     runs-on: ubuntu-latest
     permissions:
       issues: write
