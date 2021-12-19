@@ -28,6 +28,10 @@ jobs:
             If you confirm the bug, please provide us with clear steps to reproduce it.
 
             We are closing this issue for now as it seems to be a support request and not a bug. If we missed something, please leave a comment and we will take a second look.
+      - name: Close support issues
+        uses: peter-evans/close-issue@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
   add-dev-comment:
     if: github.event.label.name == 'needs developer feedback'
     runs-on: ubuntu-latest
@@ -46,7 +50,3 @@ jobs:
             We are adding the `needs developer feedback` label to this issue so that the Core team could take a look.   
             
             Please note it may take a few days for them to get to this issue. Thank you for your patience.
-      - name: Close support issues
-        uses: peter-evans/close-issue@v1
-        with:
-          issue-number: ${{ github.event.issue.number }}
