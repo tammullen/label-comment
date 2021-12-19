@@ -15,7 +15,7 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Hi ${{ github.event.issue.user.login }},
+            Hi @${{ github.event.issue.user.login }},
 
             While our goal is to address all the issues reported in this repository, GitHub should be treated as a place to report confirmed bugs only.
 
@@ -39,7 +39,7 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Hi ${{ github.event.issue.user.login }},
+            Hi @${{ github.event.issue.user.login }},
 
             Thank you for opening the issue! It requires further feedback from the WooCommerce Core team. 
             
