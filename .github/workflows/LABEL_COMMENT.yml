@@ -47,7 +47,7 @@ jobs:
             
             Please note it may take a few days for them to get to this issue. Thank you for your patience.
   close-support:
-    if: github.event.label.name == 'type: support request'
+    if: "github.event.label.name == 'type: support request'"
     runs-on: ubuntu-latest
     permissions:
       issues: write
