@@ -1,0 +1,59 @@
+name: Add comment
+on:
+  issues:
+    types:
+      - labeled
+jobs:
+  add-support-comment:
+    if: github.event.label.name == 'type: support request'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add support comment
+        uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hi ${{ github.event.issue.user.login }},
+
+            While our goal is to address all the issues reported in this repository, GitHub should be treated as a place to report confirmed bugs only.
+
+            The type of issue you submitted looks like a support request which may or may not reveal a bug once proper troubleshooting is done. In order to confirm the bug, please follow one of the steps below:
+
+            - Review [WooCommerce Self-Service Guide](https://docs.woocommerce.com/document/woocommerce-self-service-guide/) to see if the solutions listed there apply to your case;
+            - If you are a paying customer of WooCommerce, contact WooCommerce support by [opening a ticket or starting a live chat](https://woocommerce.com/contact-us/);
+            - Make a post on [WooCommerce community forum](https://wordpress.org/support/plugin/woocommerce/)
+
+            If you confirm the bug, please provide us with clear steps to reproduce it.
+
+            We are closing this issue for now as it seems to be a support request and not a bug. If we missed something, please leave a comment and we will take a second look.
+  add-dev-comment:
+    if: github.event.label.name == 'needs developer feedback'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add support comment
+        uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hi ${{ github.event.issue.user.login }},
+
+            Thank you for opening the issue! It requires further feedback from the WooCommerce Core team. 
+            
+            We are adding the `needs developer feedback` label to this issue so that the Core team could take a look.   
+            
+            Please note it may take a few days for them to get to this issue. Thank you for your patience.
+  close-support:
+    if: github.event.label.name == 'type: support request'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Close support issues
+        uses: peter-evans/close-issue@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          comment: Auto-closing issue
