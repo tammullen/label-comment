@@ -46,12 +46,6 @@ jobs:
             We are adding the `needs developer feedback` label to this issue so that the Core team could take a look.   
             
             Please note it may take a few days for them to get to this issue. Thank you for your patience.
-  close-support:
-    if: "github.event.label.name == 'type: support request'"
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write
-    steps:
       - name: Close support issues
         uses: peter-evans/close-issue@v1
         with:
