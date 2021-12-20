@@ -18,6 +18,6 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `Hi @${ context.payload.issue.user.login },\nThanks for reporting!\n \
-              This is a `test` of **Markdown**`
+              body: 'Hi @${{ github.event.issue.user.login }},\nThanks for reporting!\n \
+              This is a `test` of **Markdown**'
             })
