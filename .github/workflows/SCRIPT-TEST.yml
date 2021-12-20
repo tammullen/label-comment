@@ -1,0 +1,22 @@
+name: Add comment
+on:
+  issues:
+    types:
+      - labeled
+jobs:
+  add-dev-comment:
+    if: github.event.label.name == 'question'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add test comment
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Thanks for reporting!'
+            })
