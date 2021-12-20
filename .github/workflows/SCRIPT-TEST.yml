@@ -28,6 +28,6 @@ jobs:
             github.rest.issues.update({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  issue_number: issue.number,
+                  issue_number: context.issue.number,
                   state: 'closed'
                 })
