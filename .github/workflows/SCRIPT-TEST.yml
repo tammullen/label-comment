@@ -1,16 +1,16 @@
-name: Add comment
+name: Add issue triage comments.
 on:
   issues:
     types:
       - labeled
 jobs:
   add-dev-comment:
-    if: github.event.label.name == 'question'
+    if: "github.event.label.name == 'needs developer feedback'"
     runs-on: ubuntu-latest
     permissions:
       issues: write
     steps:
-      - name: Add test comment
+      - name: Add developer feedback comment
         uses: actions/github-script@v5
         with:
           script: |
@@ -18,10 +18,59 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Hi @${{ github.event.issue.user.login }},\nThanks for reporting!\n \
-              This is a `test` of **Markdown**'
+              body: 'Hi @${{ github.event.issue.user.login }},\n\n\
+              Thank you for opening the issue! It requires further feedback from the WooCommerce Core team.\n\n\
+              We are adding the `needs developer feedback` label to this issue so that the Core team could take a look.\n\n\
+              Please note it may take a few days for them to get to this issue. Thank you for your patience.'
+            })              
+  add-reproduction-comment:
+    if: "github.event.label.name == 'status: needs reproduction'"
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add needs reproduction comment
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'We are adding the `status: needs reproduction` label to this issue to try reproduce it on the \
+              current released version of WooCommerce.\n\n\
+              Thank you for your patience.'
             })
-      - name: Close issue
+  add-support-comment:
+    if: "github.event.label.name == 'type: support request'"
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add support request comment
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Hi @${{ github.event.issue.user.login }},\n\n\
+              While our goal is to address all the issues reported in this repository, \
+              GitHub should be treated as a place to report confirmed bugs only.\n\n\
+              The type of issue you submitted looks like a support request which may or may not reveal a bug once proper \
+              troubleshooting is done.  In order to confirm the bug, please follow one of the steps below:\n\n\
+              - Review [WooCommerce Self-Service Guide](https://docs.woocommerce.com/document/woocommerce-self-service-guide/) \
+              to see if the solutions listed there apply to your case;\n\
+              - If you are a paying customer of WooCommerce, contact WooCommerce support by \
+              [opening a ticket or starting a live chat](https://woocommerce.com/contact-us/);\n\
+              - Make a post on [WooCommerce community forum](https://wordpress.org/support/plugin/woocommerce/)\n\n\
+              If you confirm the bug, please provide us with clear steps to reproduce it.\n\n\
+              Please note it may take a few days for them to get to this issue. Thank you for your patience.'
+              We are closing this issue for now as it seems to be a support request and not a bug. \
+              If we missed something, please leave a comment and we will take a second look.'
+            })
+      - name: Close support request issue
         uses: actions/github-script@v5
         with:
           script: |
