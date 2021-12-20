@@ -21,3 +21,13 @@ jobs:
               body: 'Hi @${{ github.event.issue.user.login }},\nThanks for reporting!\n \
               This is a `test` of **Markdown**'
             })
+      - name: Close issue
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed'
+                })
