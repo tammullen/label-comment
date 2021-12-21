@@ -32,8 +32,7 @@ jobs:
       - name: Add needs reproduction comment
         uses: actions/github-script@v5
         with:
-          username: tammullen
-          password: ${{ secrets.TM_TEST }}
+          github-token: ${{ secrets.TM_TEST }}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
