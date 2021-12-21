@@ -33,7 +33,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           username: tammullen
-          password: ${{ secrets.TM_TEST }
+          password: ${{ secrets.TM_TEST }}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
