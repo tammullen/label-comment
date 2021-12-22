@@ -13,6 +13,7 @@ jobs:
       - name: Add developer feedback comment
         uses: actions/github-script@v5
         with:
+          github-token: ${{ secrets.WC_TEST }}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -51,6 +52,7 @@ jobs:
       - name: Add support request comment
         uses: actions/github-script@v5
         with:
+          github-token: ${{ secrets.WC_TEST }}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -73,6 +75,7 @@ jobs:
       - name: Close support request issue
         uses: actions/github-script@v5
         with:
+          github-token: ${{ secrets.WC_TEST }}
           script: |
             github.rest.issues.update({
                   owner: context.repo.owner,
