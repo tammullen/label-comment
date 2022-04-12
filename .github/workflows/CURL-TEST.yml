@@ -1,7 +1,6 @@
 name: Check test site.
 on:
-  schedule:
-    - cron:  '05 11 * * *'
+  workflow_dispatch:
 
 jobs:
   ping_site:
