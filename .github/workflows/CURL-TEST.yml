@@ -1,7 +1,7 @@
 name: Check test site.
 on:
   schedule:
-    - cron:  '00 11 * * *'
+    - cron:  '01 11 * * *'
 
 jobs:
   ping_site:
