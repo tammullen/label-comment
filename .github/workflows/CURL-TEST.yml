@@ -13,3 +13,11 @@ jobs:
       with:
         url-to-hit: "https://wcnightlysmoketest.bluehost-and-a8c.com/ready1/"
         expected-statuses: "200,301"
+    - name: Slack Notification
+      if: failure()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: general
+        SLACK_MESSAGE: 'Post Content :rocket:'
+        SLACK_TITLE: Post Title
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
