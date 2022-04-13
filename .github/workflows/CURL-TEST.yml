@@ -13,11 +13,11 @@ jobs:
       with:
         url-to-hit: "https://wcnightlysmoketest.bluehost-and-a8c.com/ready1/"
         expected-statuses: "200,301"
-    - name: Slack Notification
+    - name: Send message to Slack API
       if: failure()
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_CHANNEL: general
-        SLACK_MESSAGE: 'Post Content :rocket:'
-        SLACK_TITLE: Post Title
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      uses: archive/github-actions-slack@v2.0.0
+      id: notify
+      with:
+        slack-bot-user-oauth-access-token: ${{ secrets.SLACK_WEBHOOK }}
+        slack-channel: C015C6LPPSM
+        slack-text: Hello! Event "${{ github.event_name }}" in "${{ github.repository }}" 🤓
