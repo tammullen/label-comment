@@ -20,4 +20,4 @@ jobs:
       with:
         slack-bot-user-oauth-access-token: ${{ secrets.SLACK_WEBHOOK }}
         slack-channel: C015C6LPPSM
-        slack-text: :x::warning: <@${{ secrets.SLACK_USER }}> FYI the URL ${{ secrets.SLACK_TESTURL }} appears to be not found :eyes:
+        slack-text: ':x::warning: <@${{ secrets.SLACK_USER }}> FYI the URL ${{ secrets.SLACK_TESTURL }} appears to be not found :eyes:'
