@@ -9,13 +9,13 @@ jobs:
     steps:
     - name: Check the site
       id: hello
-      uses: srt32/uptime@master
+      uses: srt32/uptime@958231f4d95c117f08eb0fc70907e80d0dfedf2b
       with:
         url-to-hit: "${{ secrets.SLACK_TESTURL }}ready1/"
         expected-statuses: "200,301"
     - name: Send message to Slack API
       if: failure()
-      uses: archive/github-actions-slack@v2.0.0
+      uses: archive/github-actions-slack@deecc2edc496dc642d643de1d7cf3a47f51fb27a
       id: notify
       with:
         slack-bot-user-oauth-access-token: ${{ secrets.SLACK_WEBHOOK }}
